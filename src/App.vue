@@ -3,6 +3,21 @@
     <router-link to="/">
       <h1><span>Riptide</span></h1>
     </router-link>
+    <router-link to="/">
+      <h2><span>Explore</span></h2>
+    </router-link>
+    <router-link to="/">
+      <h2><span>Favorites</span></h2>
+    </router-link>
+    <router-link to="/">
+      <h2><span>Search</span></h2>
+    </router-link>
+    <router-link to="/">
+      <h2><span>Personality Type</span></h2>
+    </router-link>
+    <router-link to="/">
+      <h2><span>Settings</span></h2>
+    </router-link>
     <!-- <form @submit.prevent="SearchMovies()" class="search-box">
       <input type="text" placeholder="Search for a movie" v-model="search"/>
       <input type="submit" value="Search" />
@@ -48,7 +63,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Fira Sans', sans-serif;
+  font-family: sans-serif;
+  color: white;
 
   &::selection {
     background: transparentize($color: #42B883, $amount: 0.5)
@@ -56,7 +72,7 @@
 }
 
 body {
-  background-color: #277eb1;
+  background-color: black;
 }
 a {
   text-decoration: none;
@@ -67,18 +83,23 @@ header {
   align-items: center;
   justify-content: left;
   padding: 10px 16px;
-  background-color: #2c3d4e;
+  background-color: #383838;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
-  color: #FFF;
-  font-size: 28px;
+  color: #04F7DF;
+  font-size: 35px;
+  padding-right: 50px;
 
   span {
     color: #00FFD8;
   }
-  
+}
+
+h2 {
+  color: white;
+  padding-right: 70px;
 }
 .search-box {
     display: flex;
@@ -97,7 +118,7 @@ h1 {
       &[type="text"] {
         width: 100%;
         color: #FFF;
-        background-color: #496583;
+        background-color: #1F4E48;
         font-size: 20px;
         padding: 10px 16px;
         border-radius: 8px;
@@ -116,10 +137,10 @@ h1 {
       &[type="submit"] {
         width: 100%;
         max-width: 300px;
-        background-color: #496583;
+        background-color: #04F7DF;
         padding: 10px;
         border-radius: 8px;
-        color: #FFF;
+        color: black;
         font-size: 20px;
         text-transform: uppercase;
         transition: 0.4s;

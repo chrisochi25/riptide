@@ -1,10 +1,21 @@
 <template>
   <div class="movie-detail">
-      <h2>{{movie.Title}}</h2>
-      <p>{{movie.Year}}</p>
-      <p>{{movie.Rating}}</p>
-      <img :src="movie.Poster" alt="Movie Poster" class="featured-img"/>
-      <p>{{movie.Plot}}</p>
+    <table>
+        <tr>
+        <td>
+            <div class="movie-details">
+            
+            <h2>{{movie.Title}}</h2>
+            <p id="year">{{movie.Year}}</p>
+            <p id="rating">{{movie.Rating}}</p>
+            <p id="plot">{{movie.Plot}}</p>
+            </div>
+        </td>
+        <td>
+            <img :src="movie.Poster" alt="Movie Poster" class="featured-img"/>
+        </td>
+        </tr>
+    </table>
   </div>
 </template>
 
@@ -38,22 +49,43 @@ export default {
     padding: 16px;
 
     h2 {
-        color: #FFF;
-        font-size: 28px;
+        color: #04F7DF;
+        font-size: 45px;
         font-weight: 600;
         margin-bottom: 16px;
     }
 
     .featured-img {
         display: block;
-        max-width: 200px;
+        max-width: 30vw;
+        margin-bottom: 16px;
+        margin-top: 10px;
+    }
+
+    p {
+        color: #FFF;
+        font-size: 25px;
+        line-height: 1.4;
+        padding: 10px 10px;
+    }
+}
+
+.movie-details {
+    width: 70vw;
+    overflow-x: wrap;
+
+    h2 {
+        color: #04F7DF;
+        font-size: 45px;
+        font-weight: 600;
         margin-bottom: 16px;
     }
 
     p {
         color: #FFF;
-        font: size 18px;
+        font-size: 22px;
         line-height: 1.4;
+        padding-right: 50px;
     }
 }
 
