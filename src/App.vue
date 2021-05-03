@@ -3,19 +3,19 @@
     <router-link to="/">
       <h1><span>Riptide</span></h1>
     </router-link>
-    <router-link to="/">
+    <router-link to="/explore">
       <h2><span>Explore</span></h2>
     </router-link>
-    <router-link to="/">
+    <router-link to="/favorites">
       <h2><span>Favorites</span></h2>
     </router-link>
-    <router-link to="/">
+    <router-link to="/search">
       <h2><span>Search</span></h2>
     </router-link>
-    <router-link to="/">
+    <router-link to="/personality">
       <h2><span>Personality Type</span></h2>
     </router-link>
-    <router-link to="/">
+    <router-link to="/settings">
       <h2><span>Settings</span></h2>
     </router-link>
     <!-- <form @submit.prevent="SearchMovies()" class="search-box">
