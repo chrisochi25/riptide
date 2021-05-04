@@ -1,6 +1,6 @@
 <template>
   <header>
-    <router-link to="/">
+    <router-link to="/home">
       <h1><span>Riptide</span></h1>
     </router-link>
     <router-link to="/explore">
@@ -18,6 +18,11 @@
     <router-link to="/settings">
       <h2><span>Settings</span></h2>
     </router-link>
+    <div v-if="!$auth.loading.value">
+      <button v-if="!$auth.isAuthenticated.value" @click="login">Log in</button>
+      <button v-if="$auth.isAuthenticated.value" @click="logout">Log out</button>
+    </div>
+    
     <!-- <form @submit.prevent="SearchMovies()" class="search-box">
       <input type="text" placeholder="Search for a movie" v-model="search"/>
       <input type="submit" value="Search" />
@@ -29,33 +34,20 @@
 </template>
 
 <script>
-// import { ref } from 'vue';
-// import env from '@/env.js'
-// export default {
-//   setup() {
-//     const search = ref("");
-//     const movies = ref([]);
-
-//     const SearchMovies = () => {
-//       if (search.value != "") {
-//         fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=${search.value}`)
-//           .then(response => response.json())
-//           .then(data => {
-//             movies.value = data.Search;
-//             search.value = "";
-//             // uncomment below line to get list of search values in browser's console
-//             // console.log(movies.value);
-//           });
-//       }
-//     }
-
-//     return {
-//       search,
-//       movies,
-//       SearchMovies
-//     }
-//   }
-// }
+export default {
+  name: 'App',
+  methods: {
+    login() {
+      this.$auth.loginWithRedirect();
+    },
+    // Log the user out
+    logout() {
+      this.$auth.logout({
+        returnTo: window.location.origin
+      });
+    }
+  }
+}
 </script>
 
 <style lang="scss">
