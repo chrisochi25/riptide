@@ -24,19 +24,19 @@ export default {
             genres: [
                 {
                     title: 'Comedy',
-                    link: '/explore'
+                    link: '/explore/comedy'
                 },
                 {
                     title: 'Drama',
-                    link: '/explore'
+                    link: '/explore/drama'
                 },
                 {
                     title: 'Thriller',
-                    link: '/explore'
+                    link: '/explore/thriller'
                 },
                 {
                     title: 'Documentary',
-                    link: '/explore'
+                    link: '/explore/documentary'
                 },
                 {
                     title: 'Advanced Search',
