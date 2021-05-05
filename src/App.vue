@@ -1,23 +1,6 @@
 <template>
   <header>
-    <router-link to="/home">
-      <h1><span>Riptide</span></h1>
-    </router-link>
-    <router-link to="/explore">
-      <h2><span>Explore</span></h2>
-    </router-link>
-    <router-link to="/favorites">
-      <h2><span>Favorites</span></h2>
-    </router-link>
-    <router-link to="/search">
-      <h2><span>Search</span></h2>
-    </router-link>
-    <router-link to="/personality">
-      <h2><span>Personality Type</span></h2>
-    </router-link>
-    <router-link to="/settings">
-      <h2><span>Settings</span></h2>
-    </router-link>
+    <Navbar />
     <p v-if="authenticated">
       You are successfully logged in {{ user.name }}
       <br/>
@@ -34,6 +17,7 @@
       <input type="submit" value="Search" />
     </form> -->
   </header>
+  
   <main>
     <router-view />
   </main>
@@ -46,6 +30,8 @@ import createAuth0Client from '@auth0/auth0-spa-js'
 
 import { ref, computed, onMounted } from "vue";
 import { useStore } from "vuex";
+
+import Navbar from './components/Navbar';
 
 export default {
   name: 'App',
@@ -95,9 +81,13 @@ export default {
       logout
     }
 
-  }
+  },
+  components: {
+      Navbar
+    }
  
 }
+
 </script>
 
 <style lang="scss">

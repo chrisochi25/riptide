@@ -19,13 +19,14 @@
           <div class="product-imgae">
             <img :src="movie.Poster" alt="Movie Poster" />
             <div class="type">{{ movie.Type }}</div>
-          </div>
-          
-          
-          <div class="detail">
+            <div class="detail">
             <p class="year"> {{movie.Year}}</p>
             <h3>{{movie.Title}}</h3>
           </div>
+          </div>
+          
+          
+          
         
         </router-link>
       </div>
@@ -117,7 +118,7 @@ export default {
         .detail {
           background-color: #1F4E48;
           padding: 16px 8px;
-          flex: 1 1 100%;
+          flex: 1 1 50%;
           border-radius: 0px 0px 8px 8px;
 
           .year {
@@ -135,4 +136,57 @@ export default {
     }
   }
 }
+.product-image{
+          position: relative;
+          display: block;
+
+          img{
+            display: block;
+            width: 100%;
+            height: 275px;
+            object-fit: cover;
+          }
+
+          .type {
+            position: absolute;
+            padding: 8px 16px;
+            background-color: #42b883;
+            color: #FFF;
+            bottom: 16px;
+            left: 0px;
+            text-transform: capitalize;
+          }
+        }
+img{
+            display: block;
+            z-index: -1;
+            position: relative;
+            width: 100%;
+            height: fit-content;
+            object-fit: cover;
+          }
+.detail {
+          background-color: #1F4E48;
+          padding: 16px 8px;
+          flex: 1 1 50%;
+          border-radius: 0px 0px 8px 8px;
+          width: 100%;
+}
+.year {
+            color: #AAA;
+            font-size: 14px;
+          }
+          .product-image{
+          position: relative;
+          display: block;
+          }
+.type {
+            position: absolute;
+            padding: 8px 16px;
+            background-color: #42b883;
+            color: #FFF;
+            bottom: 16px;
+            left: 0px;
+            text-transform: capitalize;
+          }
 </style>

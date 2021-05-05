@@ -2,13 +2,13 @@
   <div class="home">
     <div class="feature-card">
       <router-link to="/movie/tt9140560">
-        <img src="https://collider.com/wp-content/uploads/2020/09/wandavision-poster.jpg" alt="Wandavision" class="featured-img">
+        <!-- <img src="https://collider.com/wp-content/uploads/2020/09/wandavision-poster.jpg" alt="Wandavision" class="featured-img"> 
         <div class="detail">
           <h3>Wandavision</h3>
           <p>Blends the style of classic sitcoms with the MCU, in which Wanda Maximoff and Vision - 
           two super-powered beings living their ideal suburban lives -
           begin to suspect that everything is not as it seems.</p>
-        </div>
+        </div>-->
       </router-link>
     </div>
     <form @submit.prevent="SearchMovies()" class="search-box">
