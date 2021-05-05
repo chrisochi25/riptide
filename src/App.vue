@@ -18,10 +18,16 @@
     <router-link to="/settings">
       <h2><span>Settings</span></h2>
     </router-link>
-    <div v-if="!$auth.loading.value">
-      <button v-if="!$auth.isAuthenticated.value" @click="login">Log in</button>
-      <button v-if="$auth.isAuthenticated.value" @click="logout">Log out</button>
-    </div>
+    <p v-if="authenticated">
+      You are successfully logged in {{ user.name }}
+      <br/>
+      <button @click="logout()">Log out</button>
+    </p>
+    <p v-else>
+      Login to proceed
+      <br/>
+      <button @click="login()">Login</button>
+    </p>
     
     <!-- <form @submit.prevent="SearchMovies()" class="search-box">
       <input type="text" placeholder="Search for a movie" v-model="search"/>
@@ -34,19 +40,63 @@
 </template>
 
 <script>
+
+import config from "../auth_config";
+import createAuth0Client from '@auth0/auth0-spa-js'
+
+import { ref, computed, onMounted } from "vue";
+import { useStore } from "vuex";
+
 export default {
   name: 'App',
-  methods: {
-    login() {
-      this.$auth.loginWithRedirect();
-    },
-    // Log the user out
-    logout() {
-      this.$auth.logout({
-        returnTo: window.location.origin
+  setup() {
+    const store = useStore();
+
+    let auth0Client = ref();
+
+    onMounted(async () => {
+      auth0Client.value = await createAuth0Client({
+        domain: config.domain,
+        client_id: config.clientId
       });
+
+      let userData = await auth0Client.value.getUser();
+      store.commit("setUser", userData);
+    })
+
+    let authenticated = computed(function () {
+      return store.getters.authenticated
+    })
+
+    let user = computed(function () {
+      return store.state.user
+    });
+
+    async function login() {
+      try {
+        await auth0Client.value.loginWithPopup({});
+
+        let userData = await auth0Client.value.getUser();
+        store.commit("setUser", userData);
+      } catch (e) {
+        console.error(e);
+      }
     }
+
+    function logout() {
+      return auth0Client.value.logout();
+    }
+
+    return {
+      authenticated,
+      user,
+      auth0Client,
+      login,
+      logout
+    }
+
   }
+ 
 }
 </script>
 
