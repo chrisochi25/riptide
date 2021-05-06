@@ -26,7 +26,7 @@
         <router-link :to="'/movie/' + movie.id" class="movie-link">
           
           <div class="product-image">
-            <img v-bind:src="movie.poster_path" alt="Movie Poster" />
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
             <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
@@ -47,7 +47,7 @@ import { ref } from 'vue';
 import axios from "../Services/axios.js";
 export default {
   setup() {
-    const baseImgUrl = ref("https://image.tmdb.org/t/p");
+    const baseImgUrl = ref("https://image.tmdb.org/t/p/w500");
     const comedymovies = ref([]);
     // eslint-disable-next-line no-unused-vars
     async function loadData() {
@@ -87,8 +87,8 @@ export default {
     margin: 0px 8px;
 
     .movie {
-      max-width: 50%;
-      flex: 1 1 50%;
+      max-width: 20%;
+      flex: 1 1 20%;
       padding: 16px 8px;
 
       .movie-link{
@@ -103,7 +103,7 @@ export default {
           img{
             display: block;
             width: 100%;
-            height: 275px;
+            height: 300px;
             object-fit: cover;
           }
 

@@ -24,7 +24,7 @@
         <router-link :to="'/movie/' + movie.id" class="movie-link">
           
           <div class="product-image">
-            <img v-bind:src="movie.poster_path" alt="Movie Poster" />
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
             <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
