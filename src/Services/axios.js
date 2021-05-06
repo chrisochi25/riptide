@@ -35,5 +35,8 @@ export default {
     },
     getFantasy(){
         return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=14&include_adult=false`);
-    }
+    },
+    getHistory(){
+        return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=36&include_adult=false`);
+    },
   };

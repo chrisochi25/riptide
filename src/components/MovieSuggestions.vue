@@ -164,7 +164,7 @@ export default {
         console.log(comedymovies.value);
         }
         if(props.name ==='The Historian'){
-            const moviedata = await axios.getDocumentaries();
+            const moviedata = await axios.getHistory();
             comedymovies.value = moviedata.data.results;
             console.log(comedymovies.value)
         }

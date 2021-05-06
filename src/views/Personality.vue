@@ -199,7 +199,7 @@ export default {
 				},
 				IT:{
 					title: "The Historian",
-					description: "These Historian likes to learn! These people will like documentaries."
+					description: "These Historian likes to learn! These people will like documentaries or history films."
 				},
 				IF:{
 					title: "The Day Dreamer",
