@@ -4,7 +4,6 @@
     <Dropdown title="Explore" :items="genres"/>
     <div class="menu-item"><a href="/favorites">Favorites</a></div>
     <div class="menu-item"><a href="/search">Search</a></div>
-    <div class="menu-item"><a href="/favorites">Favorites</a></div>
     <div class="menu-item"><a href="/personality">Personality</a></div>
     <Dropdown title="Settings" :items="settings"/>
     </nav>

@@ -54,13 +54,13 @@ export default {
 
     const SearchMovies = () => {
       if (search.value != "") {
-        fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=${search.value}`)
+        fetch(`http://www.omdbapi.com/?apikey=${env.OMDBapikey}&s=${search.value}`)
           .then(response => response.json())
           .then(data => {
             movies.value = data.Search;
             search.value = "";
             // uncomment below line to get list of search values in browser's console
-            // console.log(movies.value);
+            console.log(movies.value);
           });
       }
     }

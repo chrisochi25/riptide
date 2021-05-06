@@ -5,14 +5,14 @@
         <td>
             <div class="movie-details">
             
-            <h2>{{movie.Title}}</h2>
-            <p id="year">{{movie.Year}}</p>
-            <p id="rating">{{movie.Rating}}</p>
-            <p id="plot">{{movie.Plot}}</p>
+            <h2>{{movie.title}}</h2>
+            <p id="year">{{movie.release_date}}</p>
+            <p id="rating">{{movie.vote_average}}</p>
+            <p id="plot">{{movie.overview}}</p>
             </div>
         </td>
         <td>
-            <img :src="movie.Poster" alt="Movie Poster" class="featured-img"/>
+            <img :src="movie.poster_path" alt="Movie Poster" class="featured-img"/>
         </td>
         </tr>
     </table>
@@ -29,7 +29,7 @@ export default {
         const route = useRoute();
 
         onBeforeMount(() => {
-            fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&i=${route.params.id}&plot=full`)
+            fetch(`http://www.omdbapi.com/?apikey=${env.OMDBapikey}&i=${route.params.id}&plot=full`)
             .then(response => response.json())
             .then(data => {
                 // console.log(data);

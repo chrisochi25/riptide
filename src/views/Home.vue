@@ -1,70 +1,140 @@
 <template>
-  <div class="home">
-    <div class="feature-card">
-      <router-link to="/movie/tt9140560">
-        <!-- <img src="https://collider.com/wp-content/uploads/2020/09/wandavision-poster.jpg" alt="Wandavision" class="featured-img"> 
-        <div class="detail">
-          <h3>Wandavision</h3>
-          <p>Blends the style of classic sitcoms with the MCU, in which Wanda Maximoff and Vision - 
-          two super-powered beings living their ideal suburban lives -
-          begin to suspect that everything is not as it seems.</p>
-        </div>-->
-      </router-link>
+<div class="explore">
+    <h1>Explore</h1>
+    <div class="advanced-search-link">
+        <router-link :to="'/advanced-search'">
+            <h2>Don't see what you're looking for? Advanced Search</h2>
+        </router-link>
     </div>
-    <form @submit.prevent="SearchMovies()" class="search-box">
-      <input type="text" placeholder="Search for a movie" v-model="search"/>
-      <input type="submit" value="Search" />
-    </form>
     
+    <div
+      v-for="(movie, id) in popularMovies"
+      :key="id"
+      class="flex flex-shrink-0 justify-center items-center w-1/2 max-w-sm mx-auto my-8"
+    >
+      <div
+        :style="{
+          backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+        }"
+        class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
+      ></div>
+    </div>
+
+    <div
+      v-for="(movie, id) in trendingMovies"
+      :key="id"
+      class="flex flex-shrink-0 justify-center items-center w-1/2 max-w-sm mx-auto my-8"
+    >
+      <div
+        :style="{
+          backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+        }"
+        class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
+      ></div>
+    </div>
+
+    <div
+      v-for="(movie, id) in topMovies"
+      :key="id"
+      class="flex flex-shrink-0 justify-center items-center w-1/2 max-w-sm mx-auto my-8"
+    >
+      <div
+        :style="{
+          backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+        }"
+        class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
+      ></div>
+    </div>
     <div class="movies-list">
-      <div class="movie" v-for="movie in movies" :key="movie.imdbID">
-        <router-link :to="'/movie/' + movie.imdbID" class="movie-link">
+      <div class="movie" v-for="movie in popularMovies" :key="movie.id">
+        <router-link :to="'/movie/' + movie.id" class="movie-link">
           
-          <div class="product-imgae">
-            <img :src="movie.Poster" alt="Movie Poster" />
-            <div class="type">{{ movie.Type }}</div>
+         <div class="product-image">
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
+            <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
           
           <div class="detail">
-            <p class="year"> {{movie.Year}}</p>
-            <h3>{{movie.Title}}</h3>
+            <p class="year"> {{movie.release_date}}</p>
+            <h3>{{movie.title}}</h3>
           </div>
         
         </router-link>
       </div>
     </div>
-  </div>
+
+    <div class="movies-list">
+      <div class="movie" v-for="movie in trendingMovies" :key="movie.id">
+        <router-link :to="'/movie/' + movie.id" class="movie-link">
+          
+          <div class="product-image">
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
+            <div class="type">Rating: {{ movie.vote_average }}</div>
+          </div>
+          
+          
+          <div class="detail">
+            <p class="year"> {{movie.release_date}}</p>
+            <h3>{{movie.title}}</h3>
+          </div>
+        
+        </router-link>
+      </div>
+    </div>
+
+    <div class="movies-list">
+      <div class="movie" v-for="movie in topMovies" :key="movie.id">
+        <router-link :to="'/movie/' + movie.id" class="movie-link">
+          
+          <div class="product-image">
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
+            <div class="type">Rating: {{ movie.vote_average }}</div>
+          </div>
+          
+          
+          <div class="detail">
+            <p class="year"> {{movie.release_date}}</p>
+            <h3>{{movie.title}}</h3>
+          </div>
+        
+        </router-link>
+      </div>
+    </div>
+</div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import env from '@/env.js'
+import axios from "../Services/axios.js";
 export default {
   setup() {
-    const search = ref("");
-    const movies = ref([]);
+    const baseImgUrl = ref("https://image.tmdb.org/t/p");
+    const popularMovies = ref([]);
+    const trendingMovies = ref([]);
+    const topMovies = ref([]);
+    // eslint-disable-next-line no-unused-vars
+    async function loadData() {
+      try {
+        const popularMoviesData = await axios.getPopularMovies();
+        popularMovies.value = popularMoviesData.data.results;
+        console.log("Popular Movies: ",popularMovies.value);
 
-    const SearchMovies = () => {
-      if (search.value != "") {
-        fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=${search.value}`)
-          .then(response => response.json())
-          .then(data => {
-            movies.value = data.Search;
-            search.value = "";
-            // uncomment below line to get list of search values in browser's console
-            // console.log(movies.value);
-          });
+        const trendingMoviesData = await axios.getTrendingMovies();
+        trendingMovies.value = trendingMoviesData.data.results;
+        console.log("Trending Movies:", trendingMovies.value);
+
+        const topMoviesData = await axios.getTopMovies();
+        topMovies.value = topMoviesData.data.results;
+        console.log("Top Movies: ", topMovies.value);
+      } catch (err) {
+        console.log(err);
       }
     }
-
-    return {
-      search,
-      movies,
-      SearchMovies
-    }
+    loadData();
+    return { baseImgUrl, popularMovies, trendingMovies, topMovies };
   }
-}
+};
 </script>
 
 <style lang="scss">

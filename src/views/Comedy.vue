@@ -8,19 +8,32 @@
         </router-link>
     </div>
     
-    <div class="movies-list">
-      <div class="movie" v-for="movie in movies" :key="movie.imdbID">
-        <router-link :to="'/movie/' + movie.imdbID" class="movie-link">
+    <div
+    v-for="(movie, id) in comedymovies"
+    :key="id"
+    class="flex flex-shrink-0 justify-center items-center w-1/2 max-w-sm mx-auto my-8"
+  >
+    <div
+      :style="{
+        backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+      }"
+      class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
+    ></div>
+  </div>
+
+  <div class="movies-list">
+      <div class="movie" v-for="movie in comedymovies" :key="movie.id">
+        <router-link :to="'/movie/' + movie.id" class="movie-link">
           
-          <div class="product-imgae">
-            <img :src="movie.Poster" alt="Movie Poster" />
-            <div class="type">{{ movie.Type }}</div>
+          <div class="product-image">
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
+            <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
           
           <div class="detail">
-            <p class="year"> {{movie.Year}}</p>
-            <h3>{{movie.Title}}</h3>
+            <p class="year"> {{movie.release_date}}</p>
+            <h3>{{movie.title}}</h3>
           </div>
         
         </router-link>
@@ -31,27 +44,31 @@
 
 <script>
 import { ref } from 'vue';
-import env from '@/env.js'
+import axios from "../Services/axios.js";
 export default {
   setup() {
-    const movies = ref([]);
-
-    fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=funny`)
-        .then(response => response.json())
-        .then(data => {
-            movies.value = data.Search;
-        });
-
-    return {
-      movies
+    const baseImgUrl = ref("https://image.tmdb.org/t/p/w500");
+    const comedymovies = ref([]);
+    // eslint-disable-next-line no-unused-vars
+    async function loadData() {
+      try {
+        const moviedata = await axios.getComedyMovies();
+        comedymovies.value = moviedata.data.results;
+        console.log(comedymovies.value);
+      } catch (err) {
+        console.log(err);
+      }
     }
+    loadData();
+    return { baseImgUrl, comedymovies };
   }
-}
+};
+
 </script>
 
 <style lang="scss">
 .explore {
-    h1 {
+    h1{
         margin-top: 10px;
         text-align: center;
     }
@@ -70,8 +87,8 @@ export default {
     margin: 0px 8px;
 
     .movie {
-      max-width: 50%;
-      flex: 1 1 50%;
+      max-width: 20%;
+      flex: 1 1 20%;
       padding: 16px 8px;
 
       .movie-link{
@@ -86,7 +103,7 @@ export default {
           img{
             display: block;
             width: 100%;
-            height: 275px;
+            height: 300px;
             object-fit: cover;
           }
 

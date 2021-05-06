@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.15.0",
+    "axios": "^0.21.1",
     "@vueform/multiselect": "^1.4.0",
     "@vueform/slider": "^1.0.5",
     "core-js": "^3.6.5",
