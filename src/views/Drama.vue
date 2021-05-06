@@ -23,15 +23,15 @@
       <div class="movie" v-for="movie in dramaMovies" :key="movie.id">
         <router-link :to="'/movie/' + movie.id" class="movie-link">
           
-          <div class="product-imgae">
-            <img :src="movie.Poster" alt="Movie Poster" />
-            <div class="type">{{ movie.Type }}</div>
+          <div class="product-image">
+            <img v-bind:src="movie.poster_path" alt="Movie Poster" />
+            <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
           
           <div class="detail">
-            <p class="year"> {{movie.Year}}</p>
-            <h3>{{movie.Title}}</h3>
+            <p class="year"> {{movie.release_date}}</p>
+            <h3>{{movie.title}}</h3>
           </div>
         
         </router-link>
@@ -127,6 +127,7 @@ export default {
 
           h3{
             color: #FFF;
+            text-align: left;
             font-weight: 600;
             font-size: 18x;
           }
