@@ -8,9 +8,22 @@
         </router-link>
     </div>
     
+    <div
+      v-for="(movie, id) in documentaries"
+      :key="id"
+      class="flex flex-shrink-0 justify-center items-center w-1/2 max-w-sm mx-auto my-8"
+    >
+      <div
+        :style="{
+          backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+        }"
+        class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
+      ></div>
+    </div>
+
     <div class="movies-list">
-      <div class="movie" v-for="movie in movies" :key="movie.imdbID">
-        <router-link :to="'/movie/' + movie.imdbID" class="movie-link">
+      <div class="movie" v-for="movie in documentaries" :key="movie.id">
+        <router-link :to="'/movie/' + movie.id" class="movie-link">
           
           <div class="product-imgae">
             <img :src="movie.Poster" alt="Movie Poster" />
@@ -26,32 +39,36 @@
         </router-link>
       </div>
     </div>
+    
 </div>
 </template>
 
 <script>
 import { ref } from 'vue';
-import env from '@/env.js'
+import axios from "../Services/axios.js";
 export default {
   setup() {
-    const movies = ref([]);
-
-    fetch(`http://www.omdbapi.com/?apikey=${env.apikey}&s=documentary`)
-        .then(response => response.json())
-        .then(data => {
-            movies.value = data.Search;
-        });
-
-    return {
-      movies
+    const baseImgUrl = ref("https://image.tmdb.org/t/p");
+    const documentaries = ref([]);
+    // eslint-disable-next-line no-unused-vars
+    async function loadData() {
+      try {
+        const moviedata = await axios.getDocumentaries();
+        documentaries.value = moviedata.data.results;
+        console.log(documentaries.value);
+      } catch (err) {
+        console.log(err);
+      }
     }
+    loadData();
+    return { baseImgUrl, documentaries };
   }
-}
+};
 </script>
 
 <style lang="scss">
 .explore {
-    h1 {
+    h1{
         margin-top: 10px;
         text-align: center;
     }
