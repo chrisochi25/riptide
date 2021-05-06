@@ -40,7 +40,7 @@
     >
       <div
         :style="{
-          backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+          backgroundImage: `url(${baseImgUrl}/w200${movie.backdrop_path})`
         }"
         class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
       ></div>
@@ -50,7 +50,7 @@
         <router-link :to="'/movie/' + movie.id" class="movie-link">
           
          <div class="product-image">
-            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path" alt="Movie Poster" width="100px"/>
             <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
