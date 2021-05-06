@@ -6,6 +6,15 @@
             <h2>Don't see what you're looking for? Advanced Search</h2>
         </router-link>
     </div>
+
+    <div class="select">
+                <Multiselect
+                    v-model="value"
+                    placeholder="Sort by"
+                    :options="filterOptions"
+                    :searchable="true"
+                />
+                </div>
     
     <div
       v-for="(movie, id) in popularMovies"
@@ -40,7 +49,7 @@
     >
       <div
         :style="{
-          backgroundImage: `url(${baseImgUrl}/w500${movie.backdrop_path})`
+          backgroundImage: `url(${baseImgUrl}/w200${movie.backdrop_path})`
         }"
         class="bg-gray-300 h-64 w-full rounded-lg shadow-md bg-cover bg-center"
       ></div>
@@ -50,7 +59,7 @@
         <router-link :to="'/movie/' + movie.id" class="movie-link">
           
          <div class="product-image">
-            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.backdrop_path" alt="Movie Poster" width="100px"/>
             <div class="type">Rating: {{ movie.vote_average }}</div>
           </div>
           
@@ -107,6 +116,7 @@
 <script>
 import { ref } from 'vue';
 import axios from "../Services/axios.js";
+import Multiselect from '@vueform/multiselect';
 export default {
   setup() {
     const baseImgUrl = ref("https://image.tmdb.org/t/p");
@@ -133,6 +143,20 @@ export default {
     }
     loadData();
     return { baseImgUrl, popularMovies, trendingMovies, topMovies };
+  },
+  value: null,
+  components: {
+    Multiselect
+  },
+  data () {
+        return {
+          filterOptions: [
+                'Alphabetic',
+                'Rating',
+                'Most Recent',
+                'Recommended'
+            ],
+        }
   }
 };
 </script>

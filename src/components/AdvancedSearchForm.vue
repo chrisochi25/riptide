@@ -122,7 +122,7 @@ import Slider from '@vueform/slider'
 
 import VueToggle from "vue-toggle-component";
 
-import Multiselect from '@vueform/multiselect'
+import Multiselect from '@vueform/multiselect';
 
 export default {
     name: 'advanced-search',

@@ -6,13 +6,13 @@
             <div class="movie-details">
             
             <h2>{{movie.title}}</h2>
-            <p id="year">{{movie.release_date}}</p>
-            <p id="rating">{{movie.vote_average}}</p>
-            <p id="plot">{{movie.overview}}</p>
+            <p id="year">Released: {{movie.release_date}}</p>
+            <p id="rating">Rating: {{movie.vote_average}}/10</p>
+            <p id="plot">Plot: {{movie.overview}}</p>
             </div>
         </td>
         <td>
-            <img :src="movie.poster_path" alt="Movie Poster" class="featured-img"/>
+            <img v-bind:src="'https://image.tmdb.org/t/p/w500' + movie.poster_path" alt="Movie Poster" width="100px"/>
         </td>
         </tr>
     </table>
@@ -27,9 +27,10 @@ export default {
     setup() {
         const movie = ref({});
         const route = useRoute();
-
+        const movie_id = route.params.id;
+        console.log("Movie ID: ", movie_id)
         onBeforeMount(() => {
-            fetch(`http://www.omdbapi.com/?apikey=${env.OMDBapikey}&i=${route.params.id}&plot=full`)
+            fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=${env.TMDBapikey}`)
             .then(response => response.json())
             .then(data => {
                 // console.log(data);

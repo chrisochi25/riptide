@@ -7,6 +7,15 @@
             <h2>Don't see what you're looking for? Advanced Search</h2>
         </router-link>
     </div>
+
+    <div class="select">
+                <Multiselect
+                    v-model="value"
+                    placeholder="Sort by"
+                    :options="filterOptions"
+                    :searchable="true"
+                />
+                </div>
     
     <div
       v-for="(movie, id) in documentaries"
@@ -46,6 +55,7 @@
 <script>
 import { ref } from 'vue';
 import axios from "../Services/axios.js";
+import Multiselect from '@vueform/multiselect';
 export default {
   setup() {
     const baseImgUrl = ref("https://image.tmdb.org/t/p");
@@ -62,6 +72,20 @@ export default {
     }
     loadData();
     return { baseImgUrl, documentaries };
+  },
+  value: null,
+  components: {
+    Multiselect
+  },
+  data () {
+        return {
+          filterOptions: [
+                'Alphabetic',
+                'Rating',
+                'Most Recent',
+                'Recommended'
+            ],
+        }
   }
 };
 </script>
