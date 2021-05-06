@@ -49,7 +49,7 @@ export default {
                 },
                 {
                     title: 'Retake Personality Quiz',
-                    link: '#'
+                    link: '/personality'
                 },
                 {
                     title: 'Switch User',
