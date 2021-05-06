@@ -28,6 +28,6 @@ export default {
         return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=53`);
     },
     getDocumentaries(){
-        return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=99`);
+        return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=99&include_adult=false`);
     },
   };
