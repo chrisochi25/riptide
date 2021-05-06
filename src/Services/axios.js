@@ -30,4 +30,10 @@ export default {
     getDocumentaries(){
         return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=99&include_adult=false`);
     },
+    getRomances(){
+        return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=10749&include_adult=false`);
+    },
+    getFantasy(){
+        return serviceInstance.get(`/discover/movie?api_key=${key.TMDBapikey}&language=en-US&with_genres=14&include_adult=false`);
+    }
   };

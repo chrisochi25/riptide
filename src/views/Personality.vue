@@ -107,7 +107,7 @@
 	<button @click = "onReset()" class = "button" :class="type">Take Quiz Again</button>
 	
 
-	<!-- <MovieSuggestions :title="personality.title"/> Can include this later...-->
+	<MovieSuggestions :name='personality.title' :type='type'/>
 </div>
 
 
@@ -115,10 +115,12 @@
 </template>
 
 <script>
-//import MovieSuggestions from '../components/MovieSuggestions'
+import MovieSuggestions from '../components/MovieSuggestions.vue'
 export default {
 	name: 'quiz',
-	
+	components:{
+		MovieSuggestions,
+	},
 	data(){
 		return{
 			results: {},
@@ -218,7 +220,7 @@ export default {
 
 		onReset(){
 			this.isSubmitted = false;
-			this.$refs.foam.reset();
+			//this.$refs.foam.reset();
 		}
 	}
 }
