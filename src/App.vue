@@ -24,7 +24,6 @@
 </template>
 
 <script>
-
 import config from "../auth_config";
 import createAuth0Client from '@auth0/auth0-spa-js'
 
